@@ -31,3 +31,21 @@ services:
       - "/etc/passwd:/etc/passwd:ro"
       - "/etc/group:/etc/group:ro:"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
+  gazebo:
+    build: ./gazebo
+    user: "${UID:-1000}:${GID:-1000}"
+    hostname: "gazebo"
+    runtime: nvidia
+    environment:
+      - "DISPLAY=${DISPLAY}"
+      - "HOME=/workspace"
+      - "ROS_MASTER_URI=http://core:11311/"
+      - "ROS_HOSTNAME=gazebo"
+      - "ROS_HOME=/workspace/.ros"
+      - "NVIDIA_VISIBLE_DEVICES=all"
+    volumes:
+      - "./workspace:/workspace"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro:"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
