@@ -1,0 +1,33 @@
+version: "2.3"
+services:
+  core:
+    build: "./core"
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      - "DISPLAY=${DISPLAY}"
+      - "HOME=/workspace"
+      - "ROS_MASTER_URI=http://core:11311/"
+      - "ROS_HOME=/workspace"
+      - "ROS_HOSTNAME=core"
+    volumes:
+      - "./workspace:/workspace"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro:"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+  rviz:
+    build: ./rviz
+    user: "${UID:-1000}:${GID:-1000}"
+    hostname: "rviz"
+    runtime: nvidia
+    environment:
+      - "DISPLAY=${DISPLAY}"
+      - "HOME=/workspace"
+      - "ROS_MASTER_URI=http://core:11311/"
+      - "ROS_HOME=/workspace"
+      - "ROS_HOSTNAME=rviz"
+      - "NVIDIA_VISIBLE_DEVICES=all"
+    volumes:
+      - "./workspace:/workspace"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro:"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
