@@ -7,8 +7,8 @@ services:
       - "DISPLAY=${DISPLAY}"
       - "HOME=/workspace"
       - "ROS_MASTER_URI=http://core:11311/"
-      - "ROS_HOME=/workspace"
       - "ROS_HOSTNAME=core"
+      - "ROS_HOME=/workspace/.ros"
     volumes:
       - "./workspace:/workspace"
       - "/etc/passwd:/etc/passwd:ro"
@@ -23,8 +23,8 @@ services:
       - "DISPLAY=${DISPLAY}"
       - "HOME=/workspace"
       - "ROS_MASTER_URI=http://core:11311/"
-      - "ROS_HOME=/workspace"
       - "ROS_HOSTNAME=rviz"
+      - "ROS_HOME=/workspace/.ros"
       - "NVIDIA_VISIBLE_DEVICES=all"
     volumes:
       - "./workspace:/workspace"
